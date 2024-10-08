@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/images/e_-_commerce_logo_png.png" type="image/x-icon">
+    <script src="/config.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+    />
+    <title>SuperShop - Admin Add Product</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+      :root {
+        --color-background: #fff;
+        --color-primary: #f36944;
+        --color-base: #fec92b;
+        --color-sky: #74c0fc;
+        --color-green-gray: #63e6be;
+        --color-pink-gray: #e599f7;
+        --text-black-color: #000;
+        --text-white-color: #fff;
+        --text-gray-color: rgb(59, 59, 59);
+        --logo-size: 50px;
+        --name-size: 20px;
+        --navber-height: 60px;
+        --mneu-item-font-size: 15px;
+        --left-right-padding-size: 10vw;
+        --promary-border-radius: 10px;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Roboto", sans-serif;
+        width: 100vw;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .container {
+        width: 60%;
+        padding: 20px;
+        background-color: var(--color-background);
+      }
+      .container .title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .container .title img {
+        width: calc(var(--logo-size) + 20px);
+      }
+      .container .title p {
+        font-size: var(--name-size);
+        text-align: center;
+      }
+      .container .form_container form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      .container .form_container form input {
+        width: 100%;
+        outline: none;
+        border: 1px solid rgb(218, 218, 218);
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        font-size: 15px;
+      }
+      .container .form_container form label {
+        margin-bottom: 5px;
+      }
+      .container .form_container form select {
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        outline: none;
+        border: 1px solid rgb(218, 218, 218);
+        background-color: rgba(219, 219, 219, 0.315);
+      }
+      textarea {
+        outline: none;
+        border: 1px solid rgb(218, 218, 218);
+        max-width: 100%;
+        min-width: 100%;
+        min-height: 100px;
+        height: auto;
+        font-size: 18px;
+        border-radius: 5px;
+        font-family: "Roboto", sans-serif;
+      }
+      .container .form_container form input:focus,
+      textarea:focus {
+        outline: auto;
+        outline-color: #74c0fc;
+      }
+      #input-btn {
+        background-color: #74c0fc;
+        color: #fff;
+        margin-top: 20px;
+        outline: none;
+        border: none;
+        border-radius: 10px;
+      }
+
+      #progress-container {
+        position: fixed;
+        width: 200px;
+        height: 200px;
+        z-index: 1000;
+        background-color: rgba(235, 235, 235, 0.815);
+        border-radius: var(--promary-border-radius);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding-top: 5%;
+        gap: 5px;
+        display: none;
+      }
+
+      @media screen and (max-width: 768px) {
+        .container {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="title">
+        <img src="/images/e_-_commerce_logo_png.png" alt="logo" />
+        <p>SuperShop - Add Product</p>
+      </div>
+      <div class="form_container">
+        <form id="uploadForm">
+          <label for="product_title">Product Title</label>
+          <input type="text" id="product_title" name="product_title" required />
+
+          <label for="product_price">Price</label>
+          <input
+            type="number"
+            id="product_price"
+            name="product_price"
+            required
+          />
+
+          <label for="product_discount_amount">Discount Amount (Optional)</label>
+          <input
+            type="number"
+            id="product_discount_amount"
+            name="product_discount_amount"
+          />
+
+          <label for="product_delivery_price">Delivery Price (Optional)</label>
+          <input
+            type="number"
+            id="product_delivery_price"
+            name="product_delivery_price"/>
+
+          <label for="delivery_days">Delivery Days</label>
+          <input
+            type="number"
+            id="delivery_days"
+            name="delivery_days" 
+            required/>
+
+          <label for="free_delivery_places">Free Delivery Area (Optional)</label>
+          <input
+            type="text"
+            id="free_delivery_places"
+            name="free_delivery_places"/>
+          
+          <label for="product_stock">Stock Quantity</label>
+          <input type="number" id="product_stock" name="product_stock" required/>
+
+          <label for="price_currency">Price Currency</label>
+          <select id="price_currency" name="price_currency" required>
+            <option value="৳">৳ (BDT)</option>
+            <option value="$">$ (USD)</option>
+          </select>
+
+          <label for="category">Product Category</label>
+          <select id="category" name="category" required>
+            <option value="" disabled selected>Select a category</option>
+            <option value="Fashion">Fashion</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Home & Kitchen">Home & Kitchen</option>
+            <option value="Beauty & Personal Care">Beauty & Personal Care</option>
+            <option value="Health & Fitness">Health & Fitness</option>
+            <option value="Toys & Games">Toys & Games</option>
+            <option value="Automotive">Automotive</option>
+            <option value="Books & Stationery">Books & Stationery</option>
+            <option value="Sports & Outdoors">Sports & Outdoors</option>
+            <option value="Baby & Kids">Baby & Kids</option>
+            <option value="Groceries & Gourmet Food">Groceries & Gourmet Food</option>
+            <option value="Pet Supplies">Pet Supplies</option>
+            <option value="Office Supplies">Office Supplies</option>
+            <option value="Jewelry & Watches">Jewelry & Watches</option>
+            <option value="Tools & Hardware">Tools & Hardware</option>
+            <option value="Other">Other</option>
+          </select>
+          
+          <label for="product_image">Image</label>
+          <input
+            type="file"
+            id="product_image"
+            name="product_image"
+            accept="image/*"
+            required
+          />
+
+          <label for="video_url">Video Url (Optional)</label>
+          <input
+            type="text"
+            id="video_url"
+            name="video_url"/>
+
+          <label for="product_size">Product Size (Optional)</label>
+          <input
+            type="text"
+            id="product_size"
+            name="product_size"/>
+
+          <label for="return_days">Return Days</label>
+          <input
+            type="number"
+            id="return_days"
+            name="return_days"
+            required/>
+
+          <label for="return_policy">Return Policy</label>
+          <textarea
+            id="return_policy"
+            name="return_policy"
+            required
+          ></textarea>
+
+          <label for="product_keywords">Keywords</label>
+          <input
+            type="text"
+            id="product_keywords"
+            name="product_keywords"
+            required
+          />
+
+          <label for="product_description">Description</label>
+          <textarea
+            id="product_description"
+            name="product_description"
+            required
+          ></textarea>
+
+          <input id="input-btn" type="submit" value="Upload Product" />
+        </form>
+      </div>
+    </div>
+
+    <div class="progress_container" id="progress-container">
+      <div class="spinner-grow" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p id="progress">0%</p>
+    </div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+      import {
+        getDatabase,
+        ref as dbRef,
+        push,
+        set,
+      } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
+      import {
+        getStorage,
+        ref as storageRef,
+        uploadBytesResumable,
+        getDownloadURL,
+      } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-storage.js";
+      import {
+        getAuth,
+        onAuthStateChanged,
+      } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+
+      const app_S = initializeApp(firebaseConfig);
+      const storage = getStorage(app_S);
+      const database_s = getDatabase(app_S);
+      const auth = getAuth(app_S);
+      let isAdmin = false;
+      let currentUserUid;
+
+      auth.onAuthStateChanged(async (user) => {
+        if (user) {
+          currentUserUid = user.uid;
+          try {
+            const idTokenResult = await user.getIdTokenResult(true);
+            const claims = idTokenResult.claims;
+
+            if (claims.admin) {
+              console.log("User is an admin");
+              isAdmin = true;
+            } else {
+              console.log("User is not an admin");
+            }
+          } catch (error) {
+            console.error(
+              "Error getting token or checking admin status:",
+              error
+            );
+          }
+        } else {
+          console.log("No user is signed in");
+        }
+      });
+
+      const uploadForm = document.getElementById("uploadForm");
+      const progressValue = document.getElementById("progress");
+      const progressContainer = document.getElementById("progress-container");
+
+      uploadForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        progressContainer.style.display = "flex";
+        if (isAdmin) {
+          const product_image =
+            document.getElementById("product_image").files[0];
+          const product_title = document.getElementById("product_title").value;
+          let product_price = document.getElementById("product_price").value;
+          let product_discount_amount = document.getElementById(
+            "product_discount_amount"
+          ).value;
+          let product_delivery_price = document.getElementById(
+            "product_delivery_price"
+          ).value;
+          let product_stock = document.getElementById("product_stock").value;
+          let return_days = document.getElementById("return_days").value;
+          let free_delivery_places = document.getElementById("free_delivery_places").value;
+          let delivery_days = document.getElementById("delivery_days").value;
+          let product_size= document.getElementById("product_size").value
+          let video_url = document.getElementById("video_url").value;
+
+          // Calculate discount percentage 
+          let product_discount_percentage = Math.floor((product_discount_amount / product_price) * 100);
+
+          // Make the number value to string
+          product_price = Number(product_price);
+          product_discount_percentage = Number(product_discount_percentage);
+          product_discount_amount = Number(product_discount_amount);
+          product_delivery_price = Number(product_delivery_price);
+          product_stock = Number(product_stock);
+          return_days = Number(return_days);
+          delivery_days = Number(delivery_days);
+
+          const price_currency =
+            document.getElementById("price_currency").value;
+          const category = document.getElementById("category").value;
+
+          const return_policy = document.getElementById("return_policy").value;
+          const product_keywords =
+            document.getElementById("product_keywords").value;
+          let product_description = document.getElementById(
+            "product_description"
+          ).value;
+          const now = new Date().toISOString();
+
+          // Handle null input 
+          if(product_description == null || product_description === "") {
+            product_description = "No description provided.";
+          }
+          if(product_delivery_price == null || product_delivery_price === ""){
+            product_delivery_price = 0;
+          }
+          if(product_discount_percentage == null || product_discount_percentage === ""){
+            product_discount_percentage = 0;
+          }
+          if(product_discount_amount == null || product_discount_amount === ""){
+            product_discount_amount = 0;
+          }
+          if(product_price <= 0 || product_price < 0){
+            alert("Product price must be greater than 0.");
+            return;
+          }
+          if(product_stock == null || product_stock === ""){
+            product_stock = null;
+          }
+          if(return_days == null || return_days === ""){
+            return_days = 0;
+          }
+          if(free_delivery_places == null || free_delivery_places === ""){
+            free_delivery_places = "null";
+          }
+          if(product_size == null || product_size === ""){
+            product_size = "null";
+          }
+          if(video_url == null || video_url === ""){
+            video_url = "null";
+          }
+
+          const newProductRef = push(dbRef(database_s, "products"));
+          const productId = newProductRef.key;
+          const fileExtension = product_image.name.split('.').pop();  // Extract file extension
+
+          const storageRef_s = storageRef(
+            storage,
+            "products/images/" + `${productId}`
+          );
+          const uploadTask = uploadBytesResumable(storageRef_s, product_image);
+
+          uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+              const progress = Math.round(
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+              );
+              progressValue.innerText = `${progress}%`;
+            },
+            (error) => {
+              progressContainer.style.display = "none";
+              alert("Upload failed: ", error);
+            },
+            () => {
+              getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                set(newProductRef, {
+                  title: product_title,
+                  price: product_price,
+                  discount_percentage: product_discount_percentage,
+                  discount_amount: product_discount_amount,
+                  currency: price_currency,
+                  keywords: product_keywords,
+                  time: now,
+                  delivery_price: product_delivery_price,
+                  description: product_description,
+                  seller_id: currentUserUid,
+                  stock: product_stock,
+                  category: category,
+                  return_policy: return_policy,
+                  free_delivery_places: free_delivery_places,
+                  return_days: return_days,
+                  delivery_days: delivery_days,
+                  size: product_size,
+                  images: {
+                    1: downloadURL,
+                  },
+                  video: video_url
+                })
+                  .then(() => {
+                    progressContainer.style.display = "none";
+                    alert("Product uploaded successfully!");
+                    uploadForm.reset();
+                  })
+                  .catch((error) => {
+                    progressContainer.style.display = "none";
+                    alert("Error getting image url: ", error);
+                  });
+              });
+            }
+          );
+        } else {
+          progressContainer.style.display = "none";
+          alert("You are not authorized to add products.");
+        }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
